@@ -1,0 +1,25 @@
+# docker-compose.yml
+services:
+  app:
+    build: .
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8000:80"
+    command: php artisan serve --host=0.0.0.0 --port=80
+    environment:
+      - DB_CONNECTION=pgsql # ここで「PostgreSQLを使うよ」と宣言
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=laravel
+      - DB_USERNAME=sail
+      - DB_PASSWORD=password
+
+  db:
+    image: postgres:15 # これを書くだけでPostgreSQLが勝手に用意される！
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=laravel
+      - POSTGRES_USER=sail
+      - POSTGRES_PASSWORD=password
