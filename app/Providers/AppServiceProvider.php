@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //本番環境（Renderなど）なら、URLを強制的に「HTTPS（安全な封筒）」にする
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
     }
 }
