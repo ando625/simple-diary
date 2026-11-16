@@ -1,0 +1,15 @@
+# 依存パッケージの更新を自動でチェックし、更新があればPRを作る設定
+version: 2
+updates:
+  # PHPのパッケージ（composer.json / composer.lock はリポジトリの直下にある）
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  # アプリのコンテナのベースイメージ（Dockerfile。Render でも使う）
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
