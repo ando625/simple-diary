@@ -1,4 +1,4 @@
-FROM php:8.5-fpm
+FROM php:8.6-fpm
 
 # 必要なツール（PostgreSQL用の部品など）をインストール
 RUN apt-get update && apt-get install -y \
